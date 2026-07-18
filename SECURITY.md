@@ -1,6 +1,6 @@
 # Security
 
-Continuum Genesis is a local reference implementation. It is designed to be easy to inspect and safe to run locally.
+Continuum Genesis is a local reference implementation. The security posture is deliberately small, inspectable, and conservative.
 
 ## Reporting
 
@@ -15,7 +15,7 @@ In scope:
 - Demo app behavior
 - Leak-check coverage
 
-Out of scope:
+Managed separately:
 
 - Hosted Continuum infrastructure
 - Managed customer deployments
@@ -32,6 +32,6 @@ npm run leak:check
 npm run security:triple
 ```
 
-The leak check is intentionally conservative. It looks for local paths, provider key patterns, known private runtime names, and customer-data markers.
+The leak check is intentionally conservative. It looks for local paths, provider key patterns, private runtime markers, and customer-data markers.
 
 The triple gate runs the normal tests, the public leak check, and a release-shape scan that rejects common private files, hardcoded protected endpoints, and service-worker caching of protected API routes.

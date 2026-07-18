@@ -15,7 +15,7 @@ npm run eval:memory
 
 - Confirm no private instance data exists in the repo.
 - Confirm no `.env`, credentials, receipts, customer files, local paths, or private runtime code are staged.
-- Confirm the text cockpit says the free layer is not the full managed Continuum system.
+- Confirm the text cockpit describes Genesis as a local reference layer.
 - Confirm protected/managed features require a user-supplied endpoint and access token.
 - Confirm the service worker caches only static app files, not protected API responses.
 - Confirm the repo is created intentionally and the MIT publication is approved.

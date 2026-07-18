@@ -7,9 +7,9 @@
 - No API key
 - No cloud account
 
-## Before You Store Sensitive Data
+## Operating Note
 
-Continuum Genesis is the free reference layer. It does not include managed security protocols, hosted isolation, team permissions, production monitoring, or business implementation support. Use safe demo data while testing. Upgrade to the managed Continuum protocols and hosted features before using memory with sensitive customer or business records.
+Continuum Genesis is designed for local prototypes, research, and public inspection. Keep sensitive records out of the reference runtime unless you have added your own access control, backup, monitoring, and review process.
 
 ## Install
 
@@ -17,7 +17,7 @@ Continuum Genesis is the free reference layer. It does not include managed secur
 npm install
 ```
 
-## Seed Safe Demo Data
+## Seed Example Data
 
 ```powershell
 npm run seed
@@ -42,7 +42,7 @@ The text cockpit can be installed as a PWA from the browser install button or th
 ```powershell
 curl.exe -X POST http://127.0.0.1:8787/v0/memory ^
   -H "Content-Type: application/json" ^
-  -d "{\"type\":\"note\",\"title\":\"Example\",\"body\":\"Remember the customer prefers text updates.\",\"tags\":[\"demo\"]}"
+  -d "{\"type\":\"note\",\"title\":\"Follow-up preference\",\"body\":\"The customer prefers text updates after 4 PM.\",\"tags\":[\"customer\",\"follow-up\"]}"
 ```
 
 ## Create A Shard

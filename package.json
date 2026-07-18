@@ -1,7 +1,7 @@
 {
   "name": "continuum-genesis",
   "version": "0.1.0",
-  "description": "An MIT starter instance for persistent AI memory.",
+  "description": "MIT reference runtime for task-scoped AI memory.",
   "type": "module",
   "license": "MIT",
   "scripts": {

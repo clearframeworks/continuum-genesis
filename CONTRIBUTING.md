@@ -5,8 +5,8 @@ Continuum Genesis is intended to stay small, understandable, and clean-room.
 ## Rules
 
 - Do not add private instance data.
-- Do not add cloud keys, local machine paths, customer data, or internal receipts.
-- Keep the reference runtime simple. Advanced routing belongs outside this repo.
+- Do not add credentials, local machine paths, or private records.
+- Keep the reference runtime simple. Production routing belongs in managed layers or clearly separated extensions.
 - New features need tests.
 - Run `npm test` before opening a pull request.
 

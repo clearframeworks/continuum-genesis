@@ -1,8 +1,8 @@
 # Public / Private Boundary
 
-Continuum Genesis opens the memory standard. It does not open a private operating instance.
+Continuum Genesis publishes the memory layer as a clean reference implementation. The line is intentional: developers can inspect and extend the standard without inheriting private operating infrastructure.
 
-## Public In This Repo
+## Included In This Repo
 
 | Layer | Included |
 | --- | --- |
@@ -10,28 +10,28 @@ Continuum Genesis opens the memory standard. It does not open a private operatin
 | Formats | Memory item and shard shapes |
 | SDK | JavaScript client for the protocol |
 | Runtime | Local file-backed reference implementation |
-| Demo | Text cockpit for trying the reference flow |
+| Interface | Installable text cockpit for trying the reference flow |
 | Tests | Runtime checks and leak checks |
 
-## Not Included
+## Managed Continuum Layer
 
-| Layer | Status |
+| Capability | Path |
 | --- | --- |
-| Hosted engine | Closed |
-| Advanced routing and selection | Closed |
-| Managed security protocols, vaults, and tenant isolation | Closed |
-| Billing, metering, and customer operations | Closed |
-| Private operating history | Never public |
-| Customer data and receipts | Never public |
-| Credentials, local paths, and internal logs | Never public |
+| Hosted runtime | Managed deployment |
+| Advanced routing and selection | Managed protocol |
+| Security review, vaults, and tenant isolation | Managed protocol |
+| Billing, metering, and customer operations | Managed service |
+| Private operating history | Private instance only |
+| Customer data and receipts | Private instance only |
+| Credentials, local paths, and internal logs | Private instance only |
 
 ## User Responsibility
 
-This free repo is useful, but it is not the full protected system. Users are responsible for protecting their own data, reviewing shards before sending them to a model, and avoiding sensitive production use unless they have added their own security controls or upgraded to a managed Continuum protocol or hosted feature tier.
+Genesis gives you the public memory pattern. Production use still requires data classification, access control, secret handling, backup policy, audit review, and model-output review.
 
 ## Product Split
 
-Continuum Genesis is the starter instance.
+Continuum Genesis is the reference implementation.
 
 Continuum Hosted and Continuum Infrastructure are operated products: the memory standard plus managed deployment, stronger routing, business integration, and ongoing support.
 

@@ -2,7 +2,7 @@
 
 This document defines the public surface implemented by Continuum Genesis.
 
-The goal is simple: an app should be able to save useful memory, ask for task-relevant context, and receive a small shard it can pass to an AI model or workflow.
+The goal is simple: an app can save durable project memory, ask for task-relevant context, and receive a compact shard suitable for a model, workflow, or human review step.
 
 ## Terms
 
@@ -93,14 +93,25 @@ Response:
     "schema": "continuum-shard/v0",
     "query": "Draft the customer follow-up.",
     "mode": "reference-keyword-recency",
-    "items": []
+    "items": [
+      {
+        "id": "mem_...",
+        "type": "note",
+        "title": "Follow-up preference",
+        "body": "The customer prefers short updates after 4 PM.",
+        "tags": ["customer", "follow-up"],
+        "source": "local",
+        "updated_at": "2026-07-18T00:00:00.000Z",
+        "score": 17
+      }
+    ]
   }
 }
 ```
 
 ## Reference Selection
 
-The reference runtime uses basic keyword and recency scoring. It is deliberately plain. It proves the public protocol and format, not the operated Continuum engine.
+The reference runtime uses keyword and recency scoring so the behavior is easy to inspect and test. Production systems can replace the selector while preserving the same memory item and shard contracts.
 
 ## Compatibility Rule
 

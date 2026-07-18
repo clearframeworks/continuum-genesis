@@ -1,10 +1,8 @@
 # Upgrade Path
 
-Continuum Genesis is free because the memory standard should be visible, runnable, and useful.
+Continuum Genesis is MIT because the memory pattern should be visible, runnable, and useful.
 
-The full Continuum system is not included in this repo.
-
-## Free MIT Layer
+## Genesis Layer
 
 Use this when you want to:
 
@@ -21,7 +19,7 @@ You are responsible for:
 - Avoiding sensitive customer or business data unless you add your own controls
 - Backups, monitoring, access control, and deployment security
 
-## Managed Continuum Protocols And Features
+## Managed Continuum
 
 Upgrade when you need:
 
@@ -35,6 +33,6 @@ Upgrade when you need:
 
 ## Rule Of Thumb
 
-If the memory is experimental, this repo is enough.
+If the memory is experimental, Genesis is a good starting point.
 
 If the memory affects customers, operations, money, staff, compliance, or the reputation of a real business, use managed protocols and hosted features.

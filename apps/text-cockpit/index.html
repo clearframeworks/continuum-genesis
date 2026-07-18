@@ -16,8 +16,8 @@
       <h1>Continuum Genesis</h1>
       <p class="lede">A local memory runtime you can inspect, run, and adapt.</p>
       <div class="notice">
-        <strong>Use carefully.</strong>
-        <span>This free reference layer does not include the full hosted Continuum system, managed security protocols, advanced routing, or business operations support. Review what you store and what you send to models. Upgrade when the memory becomes operationally sensitive.</span>
+        <strong>Local reference layer.</strong>
+        <span>Genesis stores inspectable project memory and builds task-scoped context shards. Use safe local data for prototypes, and move sensitive operational memory into managed Continuum protocols.</span>
       </div>
       <div class="actions">
         <button id="installApp" type="button" hidden>Install PWA</button>
@@ -33,15 +33,15 @@
         </div>
         <label>
           Title
-          <input id="title" name="title" required placeholder="Customer update style">
+          <input id="title" name="title" required>
         </label>
         <label>
           Body
-          <textarea id="body" name="body" required placeholder="What should future work remember?"></textarea>
+          <textarea id="body" name="body" required></textarea>
         </label>
         <label>
           Tags
-          <input id="tags" name="tags" placeholder="customer, follow-up">
+          <input id="tags" name="tags">
         </label>
         <button type="submit">Save Memory</button>
       </form>
@@ -53,10 +53,10 @@
         </div>
         <label>
           Query
-          <input id="query" placeholder="Draft the customer follow-up">
+          <input id="query">
         </label>
         <button id="buildShard" type="button">Build Shard</button>
-        <pre id="shardOutput">Seed the demo or add memory, then build a shard.</pre>
+        <pre id="shardOutput">Seed example data or add memory, then build a shard.</pre>
       </section>
     </section>
 
@@ -64,18 +64,18 @@
       <div class="panel-head">
         <div>
           <h2>Managed Continuum</h2>
-          <p class="panel-kicker">Protected features require a Clear Frameworks endpoint and access token. No token ships in this repo.</p>
+          <p class="panel-kicker">Connect a protected Clear Frameworks endpoint when a project is ready for managed Continuum protocols.</p>
         </div>
         <span id="managedBadge" class="badge locked">locked</span>
       </div>
       <div class="managed-grid">
         <label>
           Managed endpoint
-          <input id="managedEndpoint" placeholder="https://your-managed-continuum.example">
+          <input id="managedEndpoint">
         </label>
         <label>
           Access token
-          <input id="managedToken" type="password" autocomplete="off" placeholder="Paste only when Clear Frameworks provides one">
+          <input id="managedToken" type="password" autocomplete="off">
         </label>
       </div>
       <div class="actions">
