@@ -27,6 +27,7 @@ Upgrade when you need:
 
 - Security review before production use
 - Hosted isolation
+- A protected endpoint gated by Clear Frameworks access controls
 - Stronger routing and memory selection
 - Business workflow integration
 - Customer portals, dashboards, reports, or automations

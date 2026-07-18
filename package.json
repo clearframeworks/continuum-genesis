@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "description": "An MIT starter instance for persistent AI memory.",
   "type": "module",
-  "private": true,
   "license": "MIT",
   "scripts": {
+    "icons": "node scripts/create-icons.mjs",
     "start": "node packages/memory-runtime/src/server.js",
     "dev": "node packages/memory-runtime/src/server.js",
     "seed": "node packages/memory-runtime/src/cli.js seed examples/simple-business-memory/seed.json",
     "shard": "node packages/memory-runtime/src/cli.js shard",
     "test": "node --test",
-    "leak:check": "node tests/leak-check/leak-check.test.js"
+    "leak:check": "node tests/leak-check/leak-check.test.js",
+    "security:triple": "node scripts/security-triple.mjs"
   },
   "engines": {
     "node": ">=20"

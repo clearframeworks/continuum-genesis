@@ -10,7 +10,7 @@ Continuum Genesis is the open seed: a small local memory runtime, a simple shard
 - A simple HTTP API for storing and retrieving memory
 - A shard generator that assembles task-scoped context
 - A JS SDK for apps that want to speak the memory API
-- A browser text cockpit for trying the flow
+- An installable text cockpit PWA for trying the flow
 - A leak-check test that blocks obvious private material before publishing
 
 ## What This Is Not
@@ -39,6 +39,8 @@ npm start
 
 Open `http://127.0.0.1:8787/` and try the text cockpit.
 
+The cockpit is installable as a PWA when served by the local runtime.
+
 Build a shard from the command line:
 
 ```powershell
@@ -50,6 +52,7 @@ Run checks:
 ```powershell
 npm test
 npm run leak:check
+npm run security:triple
 ```
 
 ## Repo Shape
@@ -58,7 +61,7 @@ npm run leak:check
 packages/memory-runtime/  local file-backed reference runtime
 packages/shard-format/    public shard schema and helpers
 packages/sdk-js/          JavaScript client
-apps/text-cockpit/        tiny local browser interface
+apps/text-cockpit/        installable local browser interface
 examples/                 safe sample memory
 tests/                    runtime and leak checks
 docs/                     standard, boundary, and setup docs

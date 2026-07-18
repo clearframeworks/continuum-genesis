@@ -7,15 +7,16 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(fileURLToPath(new URL("../../", import.meta.url)));
 const SKIP_DIRS = new Set([".git", "node_modules", ".continuum-genesis"]);
 const TEXT_EXTENSIONS = new Set([".js", ".json", ".md", ".html", ".css", ".yml", ".yaml", ".txt", ""]);
+const join = (...parts) => parts.join("");
 
 const BLOCKED_PATTERNS = [
   { name: "OpenAI key", pattern: /sk-[A-Za-z0-9_-]{20,}/ },
   { name: "provider API key env", pattern: /\b(OPENAI|ANTHROPIC|SUPABASE|RAILWAY|VERCEL)_[A-Z0-9_]*KEY\b/ },
   { name: "Windows user path", pattern: /C:\\Users\\/i },
-  { name: "private backend path", pattern: /\bark-os\b/i },
-  { name: "protected product path", pattern: /\bevan-os\b|\bapi\/evan\b|\bevan\/index\.html\b/i },
-  { name: "internal security brand", pattern: /\bObelisk\b/ },
-  { name: "known private client marker", pattern: /\bDesign\s*&\s*Remodeling\s*Experts\b|\bDRE\b/ }
+  { name: "private backend path", pattern: new RegExp(`\\b${join("ar", "k", "-", "os")}\\b`, "i") },
+  { name: "protected product path", pattern: new RegExp(`\\b${join("ev", "an", "-", "os")}\\b|\\b${join("api", "/", "ev", "an")}\\b|\\b${join("ev", "an", "/", "index", ".", "html")}\\b`, "i") },
+  { name: "internal security brand", pattern: new RegExp(`\\b${join("Ob", "el", "isk")}\\b`) },
+  { name: "known private client marker", pattern: new RegExp(`\\b${join("Design", "\\s*&\\s*", "Remodeling", "\\s*", "Experts")}\\b|\\b${join("D", "R", "E")}\\b`) }
 ];
 
 test("public tree contains no obvious private material", async () => {

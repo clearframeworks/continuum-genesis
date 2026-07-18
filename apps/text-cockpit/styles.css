@@ -80,6 +80,12 @@ h2 {
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
 }
 
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .notice {
   max-width: 880px;
   padding: 16px 18px;
@@ -163,9 +169,44 @@ button {
   cursor: pointer;
 }
 
+.secondary,
 .panel-head button {
   background: transparent;
   color: var(--ink);
+}
+
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  padding: 11px 14px;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.panel-kicker,
+.hint {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.managed {
+  margin: 16px 0;
+}
+
+.managed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.locked {
+  color: var(--warn);
 }
 
 pre {
@@ -230,6 +271,10 @@ pre {
   }
 
   .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .managed-grid {
     grid-template-columns: 1fr;
   }
 }

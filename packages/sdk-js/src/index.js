@@ -1,8 +1,9 @@
 export class ContinuumGenesisClient {
-  constructor({ baseUrl = "http://127.0.0.1:8787", fetchImpl = globalThis.fetch } = {}) {
+  constructor({ baseUrl = "http://127.0.0.1:8787", fetchImpl = globalThis.fetch, headers = {} } = {}) {
     if (!fetchImpl) throw new Error("fetch is required");
     this.baseUrl = baseUrl.replace(/\/+$/, "");
     this.fetch = (...args) => fetchImpl(...args);
+    this.headers = { ...headers };
   }
 
   async health() {
@@ -36,6 +37,7 @@ export class ContinuumGenesisClient {
       method: options.method || "GET",
       headers: {
         "Content-Type": "application/json",
+        ...this.headers,
         ...(options.headers || {})
       },
       body: options.body ? JSON.stringify(options.body) : undefined

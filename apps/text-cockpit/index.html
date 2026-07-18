@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#04090c">
   <title>Continuum Genesis Text Cockpit</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,6 +18,10 @@
       <div class="notice">
         <strong>Use carefully.</strong>
         <span>This free reference layer does not include the full hosted Continuum system, managed security protocols, advanced routing, or business operations support. Review what you store and what you send to models. Upgrade when the memory becomes operationally sensitive.</span>
+      </div>
+      <div class="actions">
+        <button id="installApp" type="button" hidden>Install PWA</button>
+        <a class="link-button" href="https://clearframeworks.org/contact-clearframe/" target="_blank" rel="noreferrer">Upgrade Continuum</a>
       </div>
     </section>
 
@@ -51,6 +58,31 @@
         <button id="buildShard" type="button">Build Shard</button>
         <pre id="shardOutput">Seed the demo or add memory, then build a shard.</pre>
       </section>
+    </section>
+
+    <section class="panel managed">
+      <div class="panel-head">
+        <div>
+          <h2>Managed Continuum</h2>
+          <p class="panel-kicker">Protected features require a Clear Frameworks endpoint and access token. No token ships in this repo.</p>
+        </div>
+        <span id="managedBadge" class="badge locked">locked</span>
+      </div>
+      <div class="managed-grid">
+        <label>
+          Managed endpoint
+          <input id="managedEndpoint" placeholder="https://your-managed-continuum.example">
+        </label>
+        <label>
+          Access token
+          <input id="managedToken" type="password" autocomplete="off" placeholder="Paste only when Clear Frameworks provides one">
+        </label>
+      </div>
+      <div class="actions">
+        <button id="checkManaged" type="button">Check Access</button>
+        <button id="clearManaged" type="button" class="secondary">Clear</button>
+      </div>
+      <p id="managedMessage" class="hint">This starter stays local until you connect a protected managed instance.</p>
     </section>
 
     <section class="panel">

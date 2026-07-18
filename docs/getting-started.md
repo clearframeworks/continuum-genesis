@@ -35,6 +35,8 @@ Then open:
 http://127.0.0.1:8787/
 ```
 
+The text cockpit can be installed as a PWA from the browser install button or the browser address bar.
+
 ## Add Memory With curl
 
 ```powershell

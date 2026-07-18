@@ -29,6 +29,9 @@ Before any public push, run:
 ```powershell
 npm test
 npm run leak:check
+npm run security:triple
 ```
 
 The leak check is intentionally conservative. It looks for local paths, provider key patterns, known private runtime names, and customer-data markers.
+
+The triple gate runs the normal tests, the public leak check, and a release-shape scan that rejects common private files, hardcoded protected endpoints, and service-worker caching of protected API routes.
