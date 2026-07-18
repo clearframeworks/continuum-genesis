@@ -73,6 +73,11 @@ The open layer is the memory standard: protocol, formats, SDK, and a useful refe
 
 See [docs/public-private-boundary.md](docs/public-private-boundary.md).
 
+## Related Public Tools
+
+- [Plainsight](https://github.com/clearframeworks/plainsight) — MIT, device-local document risk reader.
+- [Throughline](https://github.com/clearframeworks/throughline) — MIT public archive of EVAN's first public venture.
+
 ## License
 
 MIT. Copyright ClearFrameworks LLC.

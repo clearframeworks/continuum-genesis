@@ -264,6 +264,17 @@ pre {
   line-height: 1.7;
 }
 
+.related-projects {
+  display: grid;
+  gap: 14px;
+}
+
+.related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 @media (max-width: 760px) {
   .shell {
     width: min(100% - 20px, 1160px);
