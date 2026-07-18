@@ -55,6 +55,13 @@ npm run leak:check
 npm run security:triple
 ```
 
+Run the local comparison harness. The naked/no-memory run is only the floor benchmark; pass a separately captured native model-memory result file when comparing model memory against Continuum:
+
+```powershell
+npm run eval:memory
+npm run eval:memory -- --model-memory path/to/model-memory-results.json
+```
+
 ## Repo Shape
 
 ```text

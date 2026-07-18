@@ -8,6 +8,7 @@ Run this checklist before pushing to a public repository.
 npm test
 npm run leak:check
 npm run security:triple
+npm run eval:memory
 ```
 
 ## Manual Review

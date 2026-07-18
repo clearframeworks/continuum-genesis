@@ -10,6 +10,7 @@
     "dev": "node packages/memory-runtime/src/server.js",
     "seed": "node packages/memory-runtime/src/cli.js seed examples/simple-business-memory/seed.json",
     "shard": "node packages/memory-runtime/src/cli.js shard",
+    "eval:memory": "node scripts/evaluate-memory-lift.mjs",
     "test": "node --test",
     "leak:check": "node tests/leak-check/leak-check.test.js",
     "security:triple": "node scripts/security-triple.mjs"

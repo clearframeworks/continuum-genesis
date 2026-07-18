@@ -1,0 +1,21 @@
+{
+  "note": "Example shape only. Replace answers with a captured native model-memory run for a real comparison.",
+  "answers": [
+    {
+      "id": "customer-update",
+      "answer": "Use a short customer update after the crew confirms the next step."
+    },
+    {
+      "id": "job-records",
+      "answer": "Keep before and after notes so the office can answer later questions without calling the field crew."
+    },
+    {
+      "id": "weekly-review",
+      "answer": "Review open estimates, missing approvals, and incomplete closeout notes each Friday."
+    },
+    {
+      "id": "owner-dashboard",
+      "answer": "Show pending quotes, scheduled jobs, customer updates, and field notes."
+    }
+  ]
+}
