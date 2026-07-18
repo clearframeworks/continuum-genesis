@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://clearframeworks.org/schemas/continuum-shard-v0.schema.json",
+  "title": "Continuum Genesis Shard v0",
+  "type": "object",
+  "required": ["schema", "id", "query", "mode", "generated_at", "items"],
+  "properties": {
+    "schema": {
+      "const": "continuum-shard/v0"
+    },
+    "id": {
+      "type": "string"
+    },
+    "query": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "item_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "title", "body"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string" },
+          "title": { "type": "string" },
+          "body": { "type": "string" },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "source": { "type": "string" },
+          "updated_at": { "type": "string" },
+          "score": { "type": "number" }
+        }
+      }
+    },
+    "safety_notice": {
+      "type": "string"
+    }
+  }
+}

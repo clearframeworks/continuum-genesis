@@ -1,0 +1,9 @@
+node_modules/
+.continuum-genesis/
+coverage/
+dist/
+*.log
+.env
+.env.*
+.DS_Store
+Thumbs.db

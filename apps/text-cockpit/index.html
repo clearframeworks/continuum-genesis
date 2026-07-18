@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Continuum Genesis Text Cockpit</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">MIT starter instance</p>
+      <h1>Continuum Genesis</h1>
+      <p class="lede">A local memory runtime you can inspect, run, and adapt.</p>
+      <div class="notice">
+        <strong>Use carefully.</strong>
+        <span>This free reference layer does not include the full hosted Continuum system, managed security protocols, advanced routing, or business operations support. Review what you store and what you send to models. Upgrade when the memory becomes operationally sensitive.</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <form id="memoryForm" class="panel">
+        <div class="panel-head">
+          <h2>Add Memory</h2>
+          <span id="healthBadge" class="badge">checking</span>
+        </div>
+        <label>
+          Title
+          <input id="title" name="title" required placeholder="Customer update style">
+        </label>
+        <label>
+          Body
+          <textarea id="body" name="body" required placeholder="What should future work remember?"></textarea>
+        </label>
+        <label>
+          Tags
+          <input id="tags" name="tags" placeholder="customer, follow-up">
+        </label>
+        <button type="submit">Save Memory</button>
+      </form>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Build Shard</h2>
+          <button id="refresh" type="button">Refresh</button>
+        </div>
+        <label>
+          Query
+          <input id="query" placeholder="Draft the customer follow-up">
+        </label>
+        <button id="buildShard" type="button">Build Shard</button>
+        <pre id="shardOutput">Seed the demo or add memory, then build a shard.</pre>
+      </section>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Memory Items</h2>
+        <span id="count" class="badge">0</span>
+      </div>
+      <div id="memoryList" class="memory-list"></div>
+    </section>
+
+    <section class="upgrade">
+      <h2>When To Upgrade</h2>
+      <ul>
+        <li>You are storing sensitive business or customer records.</li>
+        <li>You need managed security review, tenant isolation, or production hosting.</li>
+        <li>You need stronger routing than this basic keyword and recency reference.</li>
+        <li>You want Continuum integrated into real workflows, dashboards, portals, or automations.</li>
+      </ul>
+    </section>
+  </main>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

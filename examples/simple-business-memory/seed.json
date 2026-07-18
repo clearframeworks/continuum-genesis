@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "type": "profile",
+      "title": "Business identity",
+      "body": "Star City Home Services is a fictional Roanoke, Virginia contractor used for local demo data. It handles repairs, punch lists, small remodels, and homeowner follow-up.",
+      "tags": ["demo", "business", "profile"]
+    },
+    {
+      "type": "rule",
+      "title": "Customer update style",
+      "body": "Customer updates should be short, specific, and sent after the field crew confirms the next step.",
+      "tags": ["customer", "follow-up", "communication"]
+    },
+    {
+      "type": "decision",
+      "title": "Photo records matter",
+      "body": "Every completed job should keep before and after notes so the office can answer future questions without calling the field crew.",
+      "tags": ["records", "field", "photos"]
+    },
+    {
+      "type": "task",
+      "title": "Friday office review",
+      "body": "Each Friday, review open estimates, missing customer approvals, and jobs with incomplete closeout notes.",
+      "tags": ["office", "review", "workflow"]
+    },
+    {
+      "type": "preference",
+      "title": "Owner dashboard",
+      "body": "The owner wants one page that shows pending quotes, scheduled jobs, unread customer updates, and unresolved field notes.",
+      "tags": ["owner", "dashboard", "retrieval"]
+    }
+  ]
+}
