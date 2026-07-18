@@ -7,9 +7,10 @@ The goal is simple: an app can save durable project memory, ask for task-relevan
 ## Terms
 
 - **Memory item**: one saved fact, note, rule, decision, or observation.
-- **Shard**: task-scoped context assembled from memory items.
+- **Context shard**: task-scoped context assembled from memory items.
 - **Runtime**: the local service that stores memory and builds shards.
 - **Client**: an app, CLI, or workflow calling the runtime.
+- **Memory provider**: any implementation that serves memory and shards to a client.
 
 ## HTTP API
 

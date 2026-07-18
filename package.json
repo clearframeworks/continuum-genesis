@@ -4,6 +4,15 @@
   "description": "MIT reference runtime for task-scoped AI memory.",
   "type": "module",
   "license": "MIT",
+  "keywords": [
+    "ai-memory",
+    "persistent-memory",
+    "context-engineering",
+    "retrieval",
+    "rag",
+    "local-first",
+    "pwa"
+  ],
   "scripts": {
     "icons": "node scripts/create-icons.mjs",
     "start": "node packages/memory-runtime/src/server.js",

@@ -19,6 +19,7 @@ npm run eval:memory
 - Confirm protected/managed features require a user-supplied endpoint and access token.
 - Confirm the service worker caches only static app files, not protected API responses.
 - Confirm the repo is created intentionally and the MIT publication is approved.
+- Confirm README still includes status, roadmap, API surface, terminology, and security posture.
 
 ## First Public Push Rule
 
