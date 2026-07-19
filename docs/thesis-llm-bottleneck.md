@@ -4,7 +4,7 @@
 
 **Claim: on standard long-memory benchmarks, the measured accuracy ceiling is primarily a limitation of the responder LLM — the "reader" that must answer from retrieved evidence — not of the memory or retrieval layer.**
 
-Stated precisely: given current-generation readers (our runs use gpt-4o-mini end to end), most wrong answers occur *after* the memory system has already done its job. The evidence for this is arithmetic, not interpretive, and it comes from our own runs plus the field's honest numbers.
+Stated precisely: given current-generation readers (our runs use gpt-4o-mini end to end), most wrong answers occur *after* the memory system has already done its job. The evidence for this is arithmetic, not interpretive. Its spine is our own runs, scored with the benchmarks' official scorers; published numbers from other parties enter this document only as independent corroboration from outside our lab.
 
 The claim is bounded. It is not "memory never matters" — the [limits section](#the-limits-of-this-claim) quantifies exactly how much of the failure is still the memory's fault, including in our own builds.
 
@@ -33,6 +33,8 @@ Now bound the failure attribution. 37.0% of questions were answered wrong. At mo
 
 **At minimum, two-thirds of all wrong answers are reader failures, not memory failures.** The reader had everything it needed and still could not assemble the correct answer. This is a lower bound; the true reader share is higher, because some retrieval-incomplete questions were answered correctly anyway.
 
+This arithmetic bound is the thesis's primary evidence. It is ours, it is officially scored, and it is the most direct form the evidence can take: it does not compare systems or infer from component swaps — it shows the reader failing with the complete evidence already in its hands.
+
 The per-category pattern in [benchmarks.md §3](./benchmarks.md#3-internal-numbers-the-bigger-picture) says the same thing from a different angle: the categories that fail hardest — temporal reasoning (54.1%), multi-session assembly (53.4%), preference inference (13.3%) — are precisely the ones that demand reasoning *over* retrieved evidence, not the ones that demand finding it.
 
 ## Move 3: The convergence proof
@@ -48,14 +50,22 @@ If the memory layer were the bottleneck, then radically different memory designs
 
 A deliberately simple keyword selector and a temporal knowledge graph share essentially no design decisions, yet with the same reader (gpt-4o-mini) they land **0.8 points apart**. The honest field clusters in a 49–64% band regardless of architecture.
 
-Convergence alone is suggestive. What makes it load-bearing is the **positive control** hiding in Zep's own published numbers: with the *same* memory system, swapping the reader from gpt-4o-mini to gpt-4o moved their score from **63.8% to 71.2%** — a **+7.4 point** jump from touching nothing but the reader.
+We contribute the higher-integrity half of that convergence: our 63.0% is officially scored with the benchmark's own scorer; Zep's 63.8% is vendor self-reported. Where the two lenses agree, ours is the one carrying the receipts — this convergence is our finding, corroborated from outside, not an external finding we are borrowing.
 
-So the field's own data gives us both directions of the experiment:
+And part of the convergence is entirely in-house: our own two builds. The sophisticated token-first engine — distill-at-write, typed records, real machinery — scored **55.6%**, *below* our simple keyword baseline's **63.0%**. More memory engineering, lower score, same reader, both officially scored. Within a single lab, effort invested in the memory layer failed to move the number in the direction it should if the memory were the constraint.
 
-- **Change the memory architecture, keep the reader:** score moves ~1 point.
-- **Keep the memory architecture, change the reader:** score moves ~7 points.
+When systems that share nothing architecturally converge on the same outcome, the most economical explanation is that the limit lives in the one component they *do* share: the reader.
 
-The component whose replacement moves the score is the bottleneck. That component is the reader. When systems that share nothing architecturally converge on the same outcome, the most economical explanation is that the limit lives in the one component they *do* share — and the reader-swap result confirms it directly.
+### The outside lens: the reverse experiment
+
+Everything above holds the reader fixed and varies the memory. Independently — a different party, a different memory architecture, numbers we did not produce — the *reverse* experiment has been published. Zep held their memory system fixed and changed only the reader, from gpt-4o-mini to gpt-4o, and their score moved from **63.8% to 71.2%** — a **+7.4 point** jump from touching nothing but the reader. **[vendor, self-reported]**
+
+We did not run a reader swap ourselves; that result is Zep's, and we cite it with credit. Its value here is precisely that it is not ours: an outside lens, on a system we do not control, landing exactly where our finding predicts. Taken together:
+
+- **Change the memory architecture, keep the reader:** score moves ~1 point *(our data, officially scored, against theirs)*.
+- **Keep the memory architecture, change the reader:** score moves ~7 points *(their data, self-reported)*.
+
+The component whose replacement moves the score is the bottleneck. That component is the reader. Our arithmetic bound (Move 2) shows it from the inside; the reader-swap corroborates it from the outside.
 
 ## What persistence actually is
 
@@ -84,7 +94,7 @@ The structural point follows. End-to-end QA accuracy is a real user outcome and 
 
 1. **Memory layers cannot engineer past the reader's reasoning ceiling.** Sophistication on the memory side buys efficiency, structure, and auditability — it does not buy answer accuracy the reader cannot produce. Our own experience is the proof: our more sophisticated token-first engine scored *lower* (55.6% vs 63.0%) than our simple baseline, because extra machinery at the memory layer cannot recover points that are lost at the reading step, while its own compression can lose a few more.
 
-2. **The accuracy ceiling rises when the reader improves, not when the memory gets more sophisticated.** Zep's +7.4-point reader swap is the cleanest published demonstration. As frontier readers improve, every honest memory system's benchmark score should rise together — and the ranking between them should barely change.
+2. **The accuracy ceiling rises when the reader improves, not when the memory gets more sophisticated.** Our arithmetic bound is the most direct demonstration — the reader failing with complete evidence in hand — and Zep's +7.4-point reader swap corroborates it from outside our lab. As frontier readers improve, every honest memory system's benchmark score should rise together — and the ranking between them should barely change.
 
 3. **The real differentiation on the memory layer is therefore not recall score.** It is retrieval quality per token, cost, data ownership, and auditability — the axes where designs genuinely separate. Our token-first engine reaches its score at ~26× fewer prompt tokens per query than the baseline ([benchmarks.md §3](./benchmarks.md#3-internal-numbers-the-bigger-picture)). Accuracy plateaus; token spend does not.
 
@@ -101,7 +111,7 @@ We publish this as a thesis, not a theorem, and the boundaries matter:
 
 ## Conclusion
 
-Our memory system delivered complete evidence for ~87% of questions. The reader converted that into correct answers 63% of the time. A completely different architecture with the same reader landed at the same score; the same architecture with a better reader broke through it. The ceiling belongs to the reader.
+Our memory system delivered complete evidence for ~87% of questions. The reader converted that into correct answers 63% of the time. Those two numbers — both ours, both officially scored — are the thesis. A completely different architecture with the same reader landed at the same score, and an outside party's published reader swap — their experiment, not ours — broke through the ceiling by changing nothing but the reader: independent corroboration, from a lens we do not control, of a finding we measured ourselves. The ceiling belongs to the reader.
 
 That is why we stopped chasing the recall number, and why every claim we publish pairs accuracy with token cost: the memory layer's honest competition is efficiency, ownership, and auditability — and the day the ceiling moves, it will be because the readers got better, for everyone at once.
 
