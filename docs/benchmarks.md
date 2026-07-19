@@ -43,7 +43,7 @@ Persistent memory is a *forget-then-reason* problem, and it is capped at both en
 
 2. **The two failure modes are a seesaw.** Keep more, and noise and token cost explode. Keep less or distill harder, and you drop the specific detail some questions need — which is exactly how our token-first engine gives up its 7.4 points against the keyword baseline (55.6% vs 63.0%). Every system rides the same accuracy/coverage curve; different builds are just different points on it. That is why they converge instead of separating.
 
-3. **Even perfect retrieval hits a reasoning wall.** Some misses occur with the right context already retrieved — temporal-reasoning and multi-hop questions fail in the responder model, not in the memory layer. That part of the ceiling belongs to the model's reasoning limit, and no retrieval design can buy it back.
+3. **Even perfect retrieval hits a reasoning wall.** Most misses occur with the right context already retrieved — temporal-reasoning and multi-hop questions fail in the responder model, not in the memory layer. Our keyword baseline retrieved the complete evidence set for 87.45% of questions (session `recall_all@10 = 0.8745`, official retrieval scorer) yet answered only 63.0% correctly — so at least two-thirds of its errors happened with everything needed already in the prompt. That part of the ceiling belongs to the model's reasoning limit, and no retrieval design can buy it back. We make this argument in full, with its limits, in [the reader-bottleneck thesis](./thesis-llm-bottleneck.md).
 
 The ~63% band is where those two hard limits — compression under uncertainty on one end, the responder's reasoning ceiling on the other — meet on this task. It is a property of the task's shape, not of anyone's code, which is why the number does not move for anyone. The one axis the ceiling does not cap is cost: accuracy plateaus, token spend does not (see §3). That is why efficiency, and the system around the memory, are where differentiation actually lives.
 
@@ -99,6 +99,18 @@ We maintain two builds and report both, including where the sophisticated one lo
 
 Keyword baseline per category: single-hop 13.8%, temporal 28.8%, multi-hop 13.6%, open-domain 42.4%, adversarial 81.2%. The adversarial category rewards saying "I don't know" and inflates overall scores — this is the same category at the center of the Zep/Mem0 dispute above, so we report the cat 1–4 subset separately for honest comparison.
 
+### Retrieval diagnostic [ours, officially scored]
+
+Scored with the official LongMemEval retrieval script (`print_retrieval_metrics.py`) on the keyword-baseline run chain (session ranking):
+
+| Metric | Score |
+| --- | --- |
+| `recall_all@5` | 0.7702 |
+| `recall_all@10` | 0.8745 |
+| `ndcg_any@10` | 0.7184 |
+
+`recall_all@10` is the strict criterion: *every* evidence session the benchmark requires was present in the top-10 retrieved — the same top-10 the QA run sends to the responder. The gap between 87.45% evidence-complete and 63.0% answer-correct is the subject of [the reader-bottleneck thesis](./thesis-llm-bottleneck.md).
+
 ### Token cost — where the engine actually wins
 
 Measured from the generation logs of the two LongMemEval-S runs (500 questions each, same responder):
@@ -129,7 +141,7 @@ We will keep running the official benchmarks as regression floors, and we will u
 
 ## Provenance
 
-- LongMemEval-S runs scored with the benchmark's official `evaluate_qa.py`, gpt-4o-mini judge, 500 questions, 2026-07-18 (keyword baseline) and 2026-07-19 (token-first engine). LoCoMo scored with its official QA scoring, gpt-4o-mini judge.
+- LongMemEval-S runs scored with the benchmark's official `evaluate_qa.py`, gpt-4o-mini judge, 500 questions, 2026-07-18 (keyword baseline) and 2026-07-19 (token-first engine). Retrieval diagnostics scored with the benchmark's official `print_retrieval_metrics.py` on the same run chain. LoCoMo scored with its official QA scoring, gpt-4o-mini judge.
 - Token counts are the scorer/generation pipeline's own totals, not estimates.
 - External figures: Zep LongMemEval from [their paper](https://arxiv.org/abs/2501.13956); LoCoMo dispute from [getzep/zep-papers#5](https://github.com/getzep/zep-papers/issues/5) and Zep's [rebuttal post](https://blog.getzep.com/lies-damn-lies-statistics-is-mem0-really-sota-in-agent-memory/); Mem0 LongMemEval figure from third-party comparisons. All external figures carry their labels above and should be treated with the same skepticism we invite toward ours.
 - Our raw scorer output logs are retained internally. Publishing the full evaluation harness as reproducible fixtures is on the [roadmap](./roadmap.md).

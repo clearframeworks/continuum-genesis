@@ -120,6 +120,8 @@ We publish our full benchmark results — internal and external, wins and regres
 
 See [docs/benchmarks.md](docs/benchmarks.md).
 
+Our position on why the recall ceiling exists — retrieval delivers complete evidence for ~87% of questions while answers land at ~63%, so the shared bottleneck is the responder LLM, not the memory layer — is argued with its limits in [docs/thesis-llm-bottleneck.md](docs/thesis-llm-bottleneck.md).
+
 ## Public Boundary
 
 Genesis is the open memory layer: protocol, shard format, reference runtime, SDK, and local cockpit. Managed Continuum adds production hosting, security review, isolation, stronger routing, business integrations, monitoring, and support.
