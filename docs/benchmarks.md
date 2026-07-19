@@ -35,6 +35,18 @@ A deliberately simple keyword selector, a sophisticated token-first engine, and 
 
 That convergence is the finding. When radically different systems bottleneck at the same outcome, the remaining errors live in the task itself — ambiguous questions, preference inference, cross-session assembly — not in any one retrieval design. Pushing a system from 63% to 70% on this benchmark is an exercise in overfitting to the test, not in building better memory.
 
+### Why the ceiling exists
+
+Persistent memory is a *forget-then-reason* problem, and it is capped at both ends.
+
+1. **Every system forgets blind.** The full history cannot fit in the model, so every architecture keeps only a slice — chosen *before* the question is known. That is compression under uncertainty: no design (keyword, embeddings, knowledge graph, write-time distillation) can predict which past detail a future question will need. Some question always needs the thing that was dropped.
+
+2. **The two failure modes are a seesaw.** Keep more, and noise and token cost explode. Keep less or distill harder, and you drop the specific detail some questions need — which is exactly how our token-first engine gives up its 7.4 points against the keyword baseline (55.6% vs 63.0%). Every system rides the same accuracy/coverage curve; different builds are just different points on it. That is why they converge instead of separating.
+
+3. **Even perfect retrieval hits a reasoning wall.** Some misses occur with the right context already retrieved — temporal-reasoning and multi-hop questions fail in the responder model, not in the memory layer. That part of the ceiling belongs to the model's reasoning limit, and no retrieval design can buy it back.
+
+The ~63% band is where those two hard limits — compression under uncertainty on one end, the responder's reasoning ceiling on the other — meet on this task. It is a property of the task's shape, not of anyone's code, which is why the number does not move for anyone. The one axis the ceiling does not cap is cost: accuracy plateaus, token spend does not (see §3). That is why efficiency, and the system around the memory, are where differentiation actually lives.
+
 So we stopped chasing the number. The benchmark's job, for us, is to establish a floor: we are not worse than anyone credible who took the official test.
 
 ## 2. Official external numbers (the parity proof)
