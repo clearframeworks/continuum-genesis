@@ -2,6 +2,10 @@
 
 All notable public changes to Continuum Genesis are tracked here.
 
+## Unreleased
+
+- Added `docs/benchmarks.md`: full internal and external benchmark results (LongMemEval-S, LoCoMo) with provenance labels, the ~63% domain-ceiling finding, and measured token-cost comparison.
+
 ## 0.1.0 - 2026-07-18
 
 - Published MIT reference runtime for task-scoped AI memory.

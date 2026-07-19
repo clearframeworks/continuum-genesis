@@ -114,6 +114,12 @@ Near-term roadmap:
 
 See [docs/roadmap.md](docs/roadmap.md).
 
+## Benchmarks
+
+We publish our full benchmark results — internal and external, wins and regressions — with every number labeled as officially scored, vendor self-reported, or independently reproduced. Summary: we hold recall parity with every credible system in the domain (~63% LongMemEval-S, a ceiling the whole field shares), and our token-first engine reaches near-parity at ~26× fewer prompt tokens per query.
+
+See [docs/benchmarks.md](docs/benchmarks.md).
+
 ## Public Boundary
 
 Genesis is the open memory layer: protocol, shard format, reference runtime, SDK, and local cockpit. Managed Continuum adds production hosting, security review, isolation, stronger routing, business integrations, monitoring, and support.
