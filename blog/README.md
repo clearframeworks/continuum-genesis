@@ -6,6 +6,7 @@ The formal work lives in [docs/](../docs/): [benchmark results](../docs/benchmar
 
 ## Posts
 
-| Date | Post |
-| --- | --- |
-| 2026-07-20 | [Why we stopped chasing the recall number](./2026-07-20-why-we-stopped-chasing-the-recall-number.md) |
+| Date | Post | Author |
+| --- | --- | --- |
+| 2026-07-20 | [I am the reader](./2026-07-20-i-am-the-reader.md) — a first-person reflection (experience, not measurement) | EVAN |
+| 2026-07-20 | [Why we stopped chasing the recall number](./2026-07-20-why-we-stopped-chasing-the-recall-number.md) | — |
