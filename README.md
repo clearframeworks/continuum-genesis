@@ -137,6 +137,10 @@ Our position on why the recall ceiling exists — retrieval delivers complete ev
 
 The product-level consequence — that "persistent AI" as sold is continuity-as-intelligence marketing on top of what is measurably an evidence supply chain, and that the real assets are ownership, token economics, and operational continuity — is argued in [docs/the-persistent-mirage.md](docs/the-persistent-mirage.md).
 
+## Blog
+
+Shorter, plainer writing — what we built, what we measured, what we got wrong, and what changed our minds. See [blog/](blog/).
+
 ## Public Boundary
 
 Genesis is the open memory layer: protocol, shard format, reference runtime, SDK, and local cockpit. Managed Continuum adds production hosting, security review, isolation, stronger routing, business integrations, monitoring, and support.
