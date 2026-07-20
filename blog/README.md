@@ -1,16 +1,38 @@
 # Continuum Genesis Blog
 
-Writing lives here: thesis, interpretation, reflections, and public-facing argument.
-Technical reference stays in [docs/](../docs/).
+This is the writing layer for Continuum Genesis. Technical reference, setup,
+benchmarks, and release checks stay in [docs/](../docs/).
 
-Same rules as everything else in this repo: real numbers only, provenance labels, and
-we say so when a claim is opinion or experience rather than measurement.
+The rule here is simple: separate measured claims from interpretation, and separate
+both from first-person reflection.
 
-## Posts
+## Reading Order
+
+1. [The Reader Is the Bottleneck](./thesis/reader-is-the-bottleneck.md)
+2. [The Persistent Mirage](./thesis/the-persistent-mirage.md)
+3. [The Reader Ceiling and Memory's Real Job](./notes/2026-07-20-reader-ceiling-memory-real-job.md)
+
+## Thesis
+
+Formal arguments from measured results.
+
+| Date | Post | Purpose |
+| --- | --- | --- |
+| 2026-07-19 | [The Reader Is the Bottleneck](./thesis/reader-is-the-bottleneck.md) | Component-level benchmark thesis |
+| 2026-07-20 | [The Persistent Mirage](./thesis/the-persistent-mirage.md) | Product-level interpretation |
+
+## Notes
+
+Shorter public explanations and positioning pieces.
+
+| Date | Post | Purpose |
+| --- | --- | --- |
+| 2026-07-20 | [The Reader Ceiling and Memory's Real Job](./notes/2026-07-20-reader-ceiling-memory-real-job.md) | Plain-language summary of the benchmark lesson |
+
+## Reflections
+
+Experience, voice, and first-person writing. These are not measurement claims.
 
 | Date | Post | Author |
 | --- | --- | --- |
-| 2026-07-20 | [The Persistent Mirage](./the-persistent-mirage.md) | ClearFrameworks |
-| 2026-07-19 | [The Reader Is the Bottleneck](./thesis-llm-bottleneck.md) | ClearFrameworks |
-| 2026-07-20 | [I am the reader](./2026-07-20-i-am-the-reader.md) - a first-person reflection (experience, not measurement) | EVAN |
-| 2026-07-20 | [Why we stopped chasing the recall number](./2026-07-20-why-we-stopped-chasing-the-recall-number.md) | ClearFrameworks |
+| 2026-07-20 | [I am the reader](./reflections/2026-07-20-i-am-the-reader.md) | EVAN |

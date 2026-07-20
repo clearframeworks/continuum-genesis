@@ -12,9 +12,9 @@
 
 Continuum Genesis is an MIT reference implementation of task-scoped AI memory.
 
-This repository contains runnable source code, tests, a local browser cockpit, and a
-small reproduction harness. The thesis docs are arguments about the measurements; the
-code lives here.
+This repository is the runnable base product: local runtime, shard format,
+JavaScript SDK, installable text cockpit, tests, and a small evaluation harness.
+Thesis writing and public interpretation are separated into [blog/](blog/).
 
 ## Run This First
 
@@ -28,7 +28,7 @@ npm run shard -- --query "What should the follow-up email remember?"
 npm run eval:memory -- --json
 ```
 
-Then start the local cockpit:
+Start the local cockpit:
 
 ```powershell
 npm start
@@ -40,7 +40,7 @@ Open:
 http://127.0.0.1:8787/
 ```
 
-## Where The Code Is
+## Inspect The System
 
 | Path | What to inspect |
 | --- | --- |
@@ -53,59 +53,36 @@ http://127.0.0.1:8787/
 | `tests/runtime/` | Runtime, shard, PWA, and memory-lift tests |
 | `scripts/evaluate-memory-lift.mjs` | Small local reproduction harness |
 
-See [docs/reproduce.md](docs/reproduce.md) for the exact commands and what each one
-proves.
+See [docs/reproduce.md](docs/reproduce.md) for exact commands and what each one proves.
 
-## What This Is
+## What It Does
 
-It gives developers a small local runtime, a public shard format, a JavaScript SDK, an
-installable text cockpit, and a repeatable evaluation harness. The goal is simple: store
-durable project facts, retrieve only what a task needs, and hand a compact context shard
-to a model or workflow.
-
-## Why It Exists
-
-Most AI workflows still choose between two weak defaults: re-send a large context bundle every turn, or rely on whatever a model remembers on its own. Genesis exposes a third pattern: keep project memory outside the model, retrieve the relevant slice on demand, and make the context unit small enough to inspect.
-
-## Core Ideas
-
-- **Task-scoped context**: retrieve a small shard instead of re-sending a whole project.
-- **Inspectable memory**: memory items are plain JSON and can be reviewed before use.
-- **Local-first runtime**: the reference service runs on `127.0.0.1` with no cloud account or API key.
-- **Portable interface**: the text cockpit can run in a browser or install as a PWA.
-- **Measured behavior**: the evaluation harness separates the naked benchmark from native model-memory comparisons.
-
-## How It Works
+Genesis stores durable project facts, retrieves only what the current task needs, and
+hands a compact context shard to a model, agent, CLI, or workflow.
 
 ```text
-memory items -> local runtime -> retrieval pass -> context shard -> model, agent, or workflow
+memory items -> local runtime -> retrieval pass -> context shard -> model or workflow
 ```
 
-The reference selector is intentionally simple: keyword and recency scoring. That keeps the mechanics auditable while leaving room for semantic retrieval, embeddings, graph memory, or agent-specific adapters.
+The reference selector is intentionally simple: keyword and recency scoring. That keeps
+the mechanics auditable while leaving room for semantic retrieval, embeddings, graph
+memory, or agent-specific adapters.
 
-## Quick Start
+## Local Runtime
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /health` | Check runtime status |
+| `GET /v0/memory` | List stored memory items |
+| `POST /v0/memory` | Add a memory item |
+| `POST /v0/shards` | Build a task-scoped context shard |
+
+Useful commands:
 
 ```powershell
-npm install
 npm run seed
-npm start
-```
-
-Open `http://127.0.0.1:8787/` and try the text cockpit.
-
-The cockpit is installable as a PWA when served by the local runtime.
-
-Build a shard from the command line:
-
-```powershell
 npm run shard -- --query "What should the follow-up email remember?"
-```
-
-Run checks:
-
-```powershell
-npm test
-npm run leak:check
+npm run eval:memory
 npm run security:triple
 ```
 
@@ -122,80 +99,28 @@ The instance JSON is the oracle for mission, runtime, isolation, and upgrade rul
 It keeps user receipts, model context shards, and audit logs as separate surfaces.
 See [docs/instances.md](docs/instances.md).
 
-Run the comparison harness. The naked/no-memory run is the floor benchmark. Add a captured native model-memory result file when comparing model memory against Continuum shards:
-
-```powershell
-npm run eval:memory
-npm run eval:memory -- --model-memory examples/evaluation/model-memory-results.sample.json
-```
-
-## API Surface
-
-| Endpoint | Purpose |
-| --- | --- |
-| `GET /health` | Check runtime status |
-| `GET /v0/memory` | List stored memory items |
-| `POST /v0/memory` | Add a memory item |
-| `POST /v0/shards` | Build a task-scoped context shard |
-
-## Architecture
-
-```text
-apps/text-cockpit/        installable browser interface
-packages/memory-runtime/  local file-backed HTTP runtime
-packages/shard-format/    memory item and shard helpers
-packages/sdk-js/          JavaScript client
-examples/                 safe seed data and evaluation shape
-tests/                    runtime, PWA, and release-safety checks
-docs/                     protocol, setup, boundary, and release notes
-```
-
-## Terminology
-
-Genesis uses familiar AI infrastructure language where it helps:
-
-- **Persistent memory**: durable project facts outside a model session.
-- **Retrieval**: selecting the memory that matters for the current task.
-- **Context shard**: the compact payload passed into a model or workflow.
-- **Memory provider**: an implementation that can serve memory to an agent, CLI, or app.
-- **Local-first**: data starts on the developer's machine and does not require a hosted account.
-
-See [docs/terminology.md](docs/terminology.md).
-
-## Status And Roadmap
-
-Genesis is at `v0.1.0`: usable as a local reference runtime and public protocol seed.
-
-Near-term roadmap:
-
-- MCP adapter for agent clients.
-- Import/export commands for portable memory sets.
-- Semantic retrieval option behind a local-only flag.
-- Expanded benchmark fixtures for native model-memory comparisons.
-- More client examples for browser apps, CLIs, and workflow runners.
-
-See [docs/roadmap.md](docs/roadmap.md).
-
 ## Benchmarks
 
-We publish our full benchmark results — internal and external, wins and regressions — with every number labeled as officially scored, vendor self-reported, or independently reproduced. Summary: we hold recall parity with every credible system in the domain (~63% LongMemEval-S, a ceiling the whole field shares), and our token-first engine reaches near-parity at ~26× fewer prompt tokens per query.
+Benchmark results live in [docs/benchmarks.md](docs/benchmarks.md), with each number
+labeled as officially scored, vendor self-reported, or independently reproduced.
 
-See [docs/benchmarks.md](docs/benchmarks.md).
+The short version: Genesis holds the same credible accuracy band as other long-memory
+systems while optimizing for token efficiency, local ownership, and auditability.
 
-Our position on why the recall ceiling exists - retrieval delivers complete evidence for ~87% of questions while answers land at ~63%, so the shared bottleneck is the responder LLM, not the memory layer - is argued with its limits in [blog/thesis-llm-bottleneck.md](blog/thesis-llm-bottleneck.md).
+For the argument behind that reading:
 
-The product-level consequence - that "persistent AI" as sold is continuity-as-intelligence marketing on top of what is measurably an evidence supply chain, and that the real assets are ownership, token economics, and operational continuity - is argued in [blog/the-persistent-mirage.md](blog/the-persistent-mirage.md).
+- [The Reader Is the Bottleneck](blog/thesis/reader-is-the-bottleneck.md)
+- [The Persistent Mirage](blog/thesis/the-persistent-mirage.md)
+- [The Reader Ceiling and Memory's Real Job](blog/notes/2026-07-20-reader-ceiling-memory-real-job.md)
 
-## Blog
+## Docs And Blog
 
-Thesis, interpretation, reflections, and public-facing writing live in [blog/](blog/).
-Technical reference lives in [docs/](docs/).
-
-## Public Boundary
-
-Genesis is the open memory layer: protocol, shard format, reference runtime, SDK, and local cockpit. Managed Continuum adds production hosting, security review, isolation, stronger routing, business integrations, monitoring, and support.
-
-Use Genesis freely for local prototypes and research. Move to managed protocols before storing sensitive business records, customer data, regulated information, or operational memory that requires access control and audit discipline.
+| Section | Purpose |
+| --- | --- |
+| [docs/](docs/) | Technical reference, reproduction, benchmarks, release checks |
+| [blog/thesis/](blog/thesis/) | Formal measurement interpretation |
+| [blog/notes/](blog/notes/) | Shorter public explanations |
+| [blog/reflections/](blog/reflections/) | First-person or experiential writing |
 
 ## Security Posture
 
@@ -205,15 +130,12 @@ Before every public push, run:
 npm run security:triple
 ```
 
-The release gate runs unit tests, leak checks, and a release-shape scan for local paths, provider key patterns, private runtime markers, customer-data markers, and service-worker caching mistakes.
+The release gate runs unit tests, leak checks, and a release-shape scan for local paths,
+provider key patterns, private runtime markers, customer-data markers, and
+service-worker caching mistakes.
 
-See [SECURITY.md](SECURITY.md), [docs/public-private-boundary.md](docs/public-private-boundary.md), and [docs/release-checklist.md](docs/release-checklist.md).
-
-## Project Practice
-
-Issues and pull requests use lightweight templates. Contributions stay small, auditable, and compatible with the MIT license.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [CHANGELOG.md](CHANGELOG.md).
+See [SECURITY.md](SECURITY.md), [docs/public-private-boundary.md](docs/public-private-boundary.md),
+and [docs/release-checklist.md](docs/release-checklist.md).
 
 ## Related Public Tools
 

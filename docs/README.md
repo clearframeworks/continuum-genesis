@@ -1,7 +1,7 @@
 # Continuum Genesis Docs
 
-Technical docs live here. Narrative essays and thesis writing live in
-[blog/](../blog/).
+Technical docs live here. Narrative essays, thesis writing, field notes, and
+reflections live in [blog/](../blog/).
 
 ## Start Here
 
@@ -18,3 +18,9 @@ Technical docs live here. Narrative essays and thesis writing live in
 - [Roadmap](./roadmap.md)
 - [Upgrade path](./upgrade-path.md)
 - [Social preview](./social-preview.md)
+
+## Writing
+
+- [Thesis papers](../blog/thesis/)
+- [Public notes](../blog/notes/)
+- [Reflections](../blog/reflections/)

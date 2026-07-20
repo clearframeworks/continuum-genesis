@@ -1,6 +1,6 @@
 # Reproduce Continuum Genesis Locally
 
-This page is for people who want to inspect the implementation before reading the thesis.
+This page is for people who want to inspect the implementation before reading the blog thesis.
 It uses only local source code and sample data. No hosted account or API key is required.
 
 ## Prerequisites
@@ -120,5 +120,5 @@ with the labels attached.
 
 This repository is not only a thesis document. It contains a runnable local memory
 runtime, a shard builder, a browser cockpit, tests, and a small local reproduction
-harness. The thesis docs explain why the measured results matter; this page shows where
+harness. The blog thesis explains why the measured results matter; this page shows where
 the implementation lives.
