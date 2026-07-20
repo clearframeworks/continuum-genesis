@@ -1,9 +1,10 @@
 export class ContinuumGenesisClient {
-  constructor({ baseUrl = "http://127.0.0.1:8787", fetchImpl = globalThis.fetch, headers = {} } = {}) {
+  constructor({ baseUrl = defaultBaseUrl(), fetchImpl = globalThis.fetch, headers = {} } = {}) {
     if (!fetchImpl) throw new Error("fetch is required");
-    this.baseUrl = baseUrl.replace(/\/+$/, "");
+    this.baseUrl = normalizeBaseUrl(baseUrl);
     this.fetch = (...args) => fetchImpl(...args);
     this.headers = { ...headers };
+    assertSafeCredentialEndpoint(this.baseUrl, this.headers);
   }
 
   async health() {
@@ -48,4 +49,42 @@ export class ContinuumGenesisClient {
     }
     return payload;
   }
+}
+
+export function defaultBaseUrl() {
+  if (typeof globalThis.location?.origin === "string" && globalThis.location.origin) {
+    return globalThis.location.origin;
+  }
+  return "http://127.0.0.1:8787";
+}
+
+export function normalizeBaseUrl(value) {
+  let url;
+  try {
+    url = new URL(String(value || "").trim());
+  } catch {
+    throw new Error("endpoint must be an absolute http(s) URL");
+  }
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    throw new Error("endpoint must use http or https");
+  }
+  url.hash = "";
+  url.search = "";
+  return url.href.replace(/\/+$/, "");
+}
+
+export function assertSafeCredentialEndpoint(baseUrl, headers = {}) {
+  const hasCredential = Object.entries(headers)
+    .some(([key, value]) => key.toLowerCase() === "authorization" && String(value || "").trim());
+  if (!hasCredential) return;
+
+  const url = new URL(baseUrl);
+  if (url.protocol === "https:") return;
+  if (url.protocol === "http:" && isLoopbackHost(url.hostname)) return;
+  throw new Error("access tokens require HTTPS or loopback HTTP endpoint");
+}
+
+function isLoopbackHost(host = "") {
+  const value = String(host).trim().toLowerCase().replace(/^\[|\]$/g, "");
+  return value === "localhost" || value === "127.0.0.1" || value === "::1";
 }

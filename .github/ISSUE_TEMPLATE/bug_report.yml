@@ -3,6 +3,10 @@ description: Report a reproducible Continuum Genesis issue
 title: "[Bug]: "
 labels: ["bug"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        For security vulnerabilities, do not publish exploit details here. Use the private reporting route in SECURITY.md.
   - type: textarea
     id: summary
     attributes:

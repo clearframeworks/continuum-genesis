@@ -34,26 +34,40 @@ export function normalizeTags(tags = []) {
   if (!Array.isArray(tags)) return [];
   return [...new Set(tags
     .map((tag) => String(tag || "").trim().toLowerCase())
-    .filter(Boolean))]
+    .filter(Boolean)
+    .map((tag) => tag.slice(0, 64)))]
     .slice(0, 20);
 }
 
-export function createMemoryItem(input = {}, now = new Date()) {
+export class ContinuumValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ContinuumValidationError";
+    this.statusCode = 400;
+    this.publicMessage = message;
+  }
+}
+
+export function createMemoryItem(input = {}, now = new Date(), options = {}) {
   const title = String(input.title || "").trim();
   const body = String(input.body || "").trim();
-  if (!title) throw new Error("memory item title is required");
-  if (!body) throw new Error("memory item body is required");
+  if (!title) throw new ContinuumValidationError("memory item title is required");
+  if (!body) throw new ContinuumValidationError("memory item body is required");
+  if (title.length > 180) throw new ContinuumValidationError("memory item title is too long");
+  if (body.length > 12000) throw new ContinuumValidationError("memory item body is too long");
 
   const timestamp = now.toISOString();
+  const trustedId = options.trustMetadata ? normalizeTrustedId(input.id) : "";
+  const trustedCreatedAt = options.trustMetadata ? normalizeTimestamp(input.created_at, "created_at") : "";
   return {
     schema: MEMORY_ITEM_SCHEMA,
-    id: input.id || createId("mem", now),
-    type: String(input.type || "note").trim().toLowerCase(),
+    id: trustedId || createId("mem", now),
+    type: normalizeType(input.type),
     title,
     body,
     tags: normalizeTags(input.tags),
     source: String(input.source || "local").trim().slice(0, 80),
-    created_at: input.created_at || timestamp,
+    created_at: trustedCreatedAt || timestamp,
     updated_at: timestamp
   };
 }
@@ -166,6 +180,41 @@ export function validateShard(shard = {}) {
 
 export function createId(prefix, now = new Date()) {
   const time = now.toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);
-  const rand = Math.random().toString(36).slice(2, 8);
+  const rand = randomHex(6);
   return `${prefix}_${time}_${rand}`;
+}
+
+function normalizeType(type = "note") {
+  const value = String(type || "note").trim().toLowerCase();
+  if (!/^[a-z][a-z0-9_-]{0,31}$/.test(value)) {
+    throw new ContinuumValidationError("memory item type is invalid");
+  }
+  return value;
+}
+
+function normalizeTrustedId(id = "") {
+  if (!id) return "";
+  const value = String(id).trim();
+  if (!/^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$/.test(value)) {
+    throw new ContinuumValidationError("memory item id is invalid");
+  }
+  return value;
+}
+
+function normalizeTimestamp(value = "", label = "timestamp") {
+  if (!value) return "";
+  const timestamp = String(value).trim();
+  if (!Number.isFinite(Date.parse(timestamp))) {
+    throw new ContinuumValidationError(`memory item ${label} is invalid`);
+  }
+  return new Date(timestamp).toISOString();
+}
+
+function randomHex(byteCount) {
+  const bytes = new Uint8Array(byteCount);
+  if (!globalThis.crypto?.getRandomValues) {
+    throw new Error("secure random source unavailable");
+  }
+  globalThis.crypto.getRandomValues(bytes);
+  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
 }

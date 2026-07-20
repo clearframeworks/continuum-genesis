@@ -22,7 +22,8 @@ process.env.CONTINUUM_GENESIS_INSTANCE_ID = oracle.id || id;
 process.env.CONTINUUM_GENESIS_PORT = String(process.env.CONTINUUM_GENESIS_PORT || oracle.runtime?.port || 8788);
 process.env.CONTINUUM_GENESIS_HOST = String(process.env.CONTINUUM_GENESIS_HOST || oracle.runtime?.host || "127.0.0.1");
 
-await import("../packages/memory-runtime/src/server.js");
+const { startRuntimeServer } = await import("../packages/memory-runtime/src/server.js");
+await startRuntimeServer();
 
 function normalizeId(value) {
   const normalized = String(value).trim().toLowerCase();

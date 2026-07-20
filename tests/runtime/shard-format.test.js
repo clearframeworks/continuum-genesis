@@ -10,13 +10,13 @@ test("buildShard selects relevant memory", () => {
       title: "Customer update style",
       body: "Send short customer updates after the field crew confirms the next step.",
       tags: ["customer", "follow-up"]
-    }, now),
+    }, now, { trustMetadata: true }),
     createMemoryItem({
       id: "two",
       title: "Owner dashboard",
       body: "Show quotes, jobs, unread updates, and unresolved field notes.",
       tags: ["dashboard"]
-    }, now)
+    }, now, { trustMetadata: true })
   ];
 
   const shard = buildShard({
@@ -41,7 +41,7 @@ test("renderShardAsText creates a readable packet", () => {
         title: "Owner dashboard",
         body: "Show the owner pending quotes and unresolved field notes.",
         tags: ["dashboard"]
-      }, new Date("2026-07-18T12:00:00.000Z"))
+      }, new Date("2026-07-18T12:00:00.000Z"), { trustMetadata: true })
     ],
     now: new Date("2026-07-18T12:00:00.000Z")
   });

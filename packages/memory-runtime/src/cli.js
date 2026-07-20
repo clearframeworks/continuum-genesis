@@ -16,7 +16,7 @@ try {
     const seed = JSON.parse(raw);
     const items = Array.isArray(seed) ? seed : seed.items;
     if (!Array.isArray(items)) throw new Error("seed file must be an array or { items: [] }");
-    const store = await seedMemory(items, ROOT);
+    const store = await seedMemory(items, ROOT, { force: args.includes("--force") });
     console.log(`Seeded ${store.items.length} memory items.`);
   } else if (command === "list") {
     const items = await listMemory({ q: getFlagValue(args, "--query") || getFlagValue(args, "-q") }, ROOT);
@@ -29,7 +29,7 @@ try {
     console.log(renderShardAsText(shard));
   } else {
     console.log("Usage:");
-    console.log("  node packages/memory-runtime/src/cli.js seed examples/simple-business-memory/seed.json");
+    console.log("  node packages/memory-runtime/src/cli.js seed examples/simple-business-memory/seed.json [--force]");
     console.log("  node packages/memory-runtime/src/cli.js list --query customer");
     console.log("  node packages/memory-runtime/src/cli.js shard --query \"customer update\"");
   }

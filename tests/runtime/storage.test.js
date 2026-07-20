@@ -34,3 +34,42 @@ test("storage seeds, lists, and adds memory", async () => {
     await rm(cwd, { recursive: true, force: true });
   }
 });
+
+test("seedMemory requires force before replacing an existing store", async () => {
+  const cwd = await mkdtemp(path.join(tmpdir(), "continuum-genesis-"));
+  try {
+    await seedMemory([
+      {
+        title: "Original item",
+        body: "This should not be replaced silently.",
+        tags: ["demo"]
+      }
+    ], cwd);
+
+    await assert.rejects(() => seedMemory([
+      {
+        title: "Replacement item",
+        body: "This requires explicit force.",
+        tags: ["demo"]
+      }
+    ], cwd), /pass --force/);
+
+    let items = await listMemory({}, cwd);
+    assert.equal(items.length, 1);
+    assert.equal(items[0].title, "Original item");
+
+    await seedMemory([
+      {
+        title: "Replacement item",
+        body: "This replacement is explicit.",
+        tags: ["demo"]
+      }
+    ], cwd, { force: true });
+
+    items = await listMemory({}, cwd);
+    assert.equal(items.length, 1);
+    assert.equal(items[0].title, "Replacement item");
+  } finally {
+    await rm(cwd, { recursive: true, force: true });
+  }
+});

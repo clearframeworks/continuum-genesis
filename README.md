@@ -86,6 +86,9 @@ npm run eval:memory
 npm run security:triple
 ```
 
+`npm run seed` refuses to replace existing memory. Use `npm run seed -- --force`
+only when you intentionally want to reset the local demo store.
+
 ## Isolated Instances
 
 The base product stays generic. Local instance data lives outside the product code:

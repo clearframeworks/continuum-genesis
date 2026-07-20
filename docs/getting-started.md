@@ -23,6 +23,9 @@ npm install
 npm run seed
 ```
 
+Seeding refuses to replace an existing memory store. Use `npm run seed -- --force`
+only when resetting the local demo data is intentional.
+
 ## Run The Runtime
 
 ```powershell
@@ -36,6 +39,10 @@ http://127.0.0.1:8787/
 ```
 
 The text cockpit can be installed as a PWA from the browser install button or the browser address bar.
+
+The local API accepts browser calls from the runtime's own loopback origin. Cross-origin
+browser reads and writes are rejected so another page cannot read or poison local memory
+while the runtime is open.
 
 ## Add Memory With curl
 
