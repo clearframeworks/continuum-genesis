@@ -60,6 +60,19 @@ npm run leak:check
 npm run security:triple
 ```
 
+## Isolated Instances
+
+The base product stays generic. Local instance data lives outside the product code:
+
+```powershell
+npm run instance:create -- instance-001
+npm run instance:start -- instance-001
+```
+
+The instance JSON is the oracle for mission, runtime, isolation, and upgrade rules.
+It keeps user receipts, model context shards, and audit logs as separate surfaces.
+See [docs/instances.md](docs/instances.md).
+
 Run the comparison harness. The naked/no-memory run is the floor benchmark. Add a captured native model-memory result file when comparing model memory against Continuum shards:
 
 ```powershell
@@ -121,6 +134,8 @@ We publish our full benchmark results — internal and external, wins and regres
 See [docs/benchmarks.md](docs/benchmarks.md).
 
 Our position on why the recall ceiling exists — retrieval delivers complete evidence for ~87% of questions while answers land at ~63%, so the shared bottleneck is the responder LLM, not the memory layer — is argued with its limits in [docs/thesis-llm-bottleneck.md](docs/thesis-llm-bottleneck.md).
+
+The product-level consequence — that "persistent AI" as sold is continuity-as-intelligence marketing on top of what is measurably an evidence supply chain, and that the real assets are ownership, token economics, and operational continuity — is argued in [docs/the-persistent-mirage.md](docs/the-persistent-mirage.md).
 
 ## Public Boundary
 
