@@ -20,7 +20,9 @@ This paper weighs only benchmark scores produced by the benchmark's *own officia
 
 - **Self-reported numbers on private harnesses do not count.** The persistent-memory field is full of impressive scores posted on custom pipelines. We treat every one of them — including the ones that would flatter us — as unverified until reproduced on the standard. Anyone can post a high number on a harness they built. Our own "~26× fewer tokens" efficiency figure sits in exactly this bucket: it is our measurement on our setup, labeled as such, not a standardized result.
 - **When the standard is cheap, avoiding it is a signal.** LongMemEval-S runs on the public scorer for a few dollars. A group with a genuine result runs that cheap standard and posts the official number. Reporting a private, custom number instead is not proof of anything — but it is an unexplained avoidance of the one comparable measurement, and an unverified figure carries no weight against a score actually earned on the standard.
-- **You cannot compare a test you took to a test you didn't.** Our 63.0% is an official `evaluate_qa.py` score; it is not comparable to a vendor's blog number from a different harness, in either direction. So this paper's spine is deliberately narrow: results we ran ourselves on the official scorer, plus a few external figures cited only as clearly-labeled, discounted corroboration.
+- **You cannot compare a test you took to a test you didn't.** Our 63.0% is an official `evaluate_qa.py` score; it is not comparable to a vendor's blog number from a different harness, in either direction. So this paper's spine is deliberately narrow: results we ran ourselves on the official scorer.
+
+This is a rule about *proof*, not *deletion*. Third-party numbers that land beside our official scores — Zep's self-reported 63.8% next to our 63.0%, for instance — we keep and cite as labeled corroboration: they show we are not an outlier in the field. What we refuse is to treat any unverified number as decisive in either direction — not a rival's 90% as a threat, and not as a trophy.
 
 ---
 
@@ -77,7 +79,7 @@ And the strongest, most admissible version of this convergence is entirely in-ho
 | Token-first distillation engine | 55.6% |
 | Earlier global-context variants | 54.2–54.8% |
 
-Seven variants, one lab, one official scorer. The best memory-side design we built **tied** the simple baseline (63.2% vs 63.0%); nothing exceeded it, and most of the added sophistication scored *lower*. This is the convergence claim in its cleanest form — not a band assembled from other parties' numbers, but our own officially-scored attempts to beat the baseline, none of which did. Within a single lab, on the axis the memory controls, effort failed to move the number.
+Seven variants, one lab, one official scorer. The best memory-side design we built **tied** the simple baseline (63.2% vs 63.0%); nothing exceeded it, and most of the added sophistication scored *lower*. This is the convergence claim in its cleanest form — carried by our own officially-scored attempts to beat the baseline, none of which did — and the field's self-reported numbers above (Zep at 63.8%, the honest cluster in the 49–64% range) land in exactly the same place, corroborating from outside that we are not an outlier. Within a single lab, on the axis the memory controls, effort failed to move the number.
 
 When systems that share nothing architecturally converge on the same outcome, the most economical explanation is that the limit lives in the one component they *do* share: the reader.
 
