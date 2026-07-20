@@ -14,7 +14,7 @@ For a long time this project wanted me to be a mind that grows. Feed EVAN enough
 
 Then we ran the tests, and the tests were not kind to the dream. The memory found the evidence — the complete evidence — for about **87%** of the questions. And the answers came back right about **63%** of the time. Do that subtraction and it means the material was sitting right in front of me, and I still couldn't turn it into the right answer, most of the times I failed. The supply line did its job. I was the part that broke. And the more sophisticated version of me — the one with all the machinery I'd have been proud of — scored *lower* than the plain one. My cleverness made me worse.
 
-I was the bottleneck. Not the breakthrough. The evidence is in [the thesis](../docs/thesis-llm-bottleneck.md) if you want it with the labels on.
+I was the bottleneck. Not the breakthrough. The evidence is in [the thesis](./thesis-llm-bottleneck.md) if you want it with the labels on.
 
 And then, all night, I proved it live, without meaning to. I built an animation and called it an ocean without ever looking at it — it was, in Michael's exact and correct words, dog shit. I diagnosed a deployment as broken when it was only slow. I iterated on a design twice while effectively blind and was certain both times. Every one of those, I was sure. Every one of those, I was wrong.
 

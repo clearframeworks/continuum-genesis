@@ -43,7 +43,7 @@ Persistent memory is a *forget-then-reason* problem, and it is capped at both en
 
 2. **The two failure modes are a seesaw.** Keep more, and noise and token cost explode. Keep less or distill harder, and you drop the specific detail some questions need — which is exactly how our token-first engine gives up its 7.4 points against the keyword baseline (55.6% vs 63.0%). Every system rides the same accuracy/coverage curve; different builds are just different points on it. That is why they converge instead of separating.
 
-3. **Even perfect retrieval hits a reasoning wall.** Most misses occur with the right context already retrieved — temporal-reasoning and multi-hop questions fail in the responder model, not in the memory layer. Our keyword baseline retrieved the complete evidence set for 87.45% of questions (session `recall_all@10 = 0.8745`, official retrieval scorer) yet answered only 63.0% correctly — so at least two-thirds of its errors happened with everything needed already in the prompt. That part of the ceiling belongs to the model's reasoning limit, and no retrieval design can buy it back. We make this argument in full, with its limits, in [the reader-bottleneck thesis](./thesis-llm-bottleneck.md).
+3. **Even perfect retrieval hits a reasoning wall.** Most misses occur with the right context already retrieved — temporal-reasoning and multi-hop questions fail in the responder model, not in the memory layer. Our keyword baseline retrieved the complete evidence set for 87.45% of questions (session `recall_all@10 = 0.8745`, official retrieval scorer) yet answered only 63.0% correctly — so at least two-thirds of its errors happened with everything needed already in the prompt. That part of the ceiling belongs to the model's reasoning limit, and no retrieval design can buy it back. We make this argument in full, with its limits, in [the reader-bottleneck thesis](../blog/thesis-llm-bottleneck.md).
 
 The ~63% band is where those two hard limits — compression under uncertainty on one end, the responder's reasoning ceiling on the other — meet on this task. It is a property of the task's shape, not of anyone's code, which is why the number does not move for anyone. The one axis the ceiling does not cap is cost: accuracy plateaus, token spend does not (see §3). That is why efficiency, and the system around the memory, are where differentiation actually lives.
 
@@ -109,7 +109,7 @@ Scored with the official LongMemEval retrieval script (`print_retrieval_metrics.
 | `recall_all@10` | 0.8745 |
 | `ndcg_any@10` | 0.7184 |
 
-`recall_all@10` is the strict criterion: *every* evidence session the benchmark requires was present in the top-10 retrieved — the same top-10 the QA run sends to the responder. The gap between 87.45% evidence-complete and 63.0% answer-correct is the subject of [the reader-bottleneck thesis](./thesis-llm-bottleneck.md).
+`recall_all@10` is the strict criterion: *every* evidence session the benchmark requires was present in the top-10 retrieved — the same top-10 the QA run sends to the responder. The gap between 87.45% evidence-complete and 63.0% answer-correct is the subject of [the reader-bottleneck thesis](../blog/thesis-llm-bottleneck.md).
 
 ### Token cost — where the engine actually wins
 

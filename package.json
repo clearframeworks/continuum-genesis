@@ -17,6 +17,8 @@
     "icons": "node scripts/create-icons.mjs",
     "start": "node packages/memory-runtime/src/server.js",
     "dev": "node packages/memory-runtime/src/server.js",
+    "instance:create": "node scripts/create-instance.mjs",
+    "instance:start": "node scripts/start-instance.mjs",
     "seed": "node packages/memory-runtime/src/cli.js seed examples/simple-business-memory/seed.json",
     "shard": "node packages/memory-runtime/src/cli.js shard",
     "eval:memory": "node scripts/evaluate-memory-lift.mjs",

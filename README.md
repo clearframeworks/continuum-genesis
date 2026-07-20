@@ -12,7 +12,56 @@
 
 Continuum Genesis is an MIT reference implementation of task-scoped AI memory.
 
-It gives developers a small local runtime, a public shard format, a JavaScript SDK, an installable text cockpit, and a repeatable evaluation harness. The goal is simple: store durable project facts, retrieve only what a task needs, and hand a compact context shard to a model or workflow.
+This repository contains runnable source code, tests, a local browser cockpit, and a
+small reproduction harness. The thesis docs are arguments about the measurements; the
+code lives here.
+
+## Run This First
+
+No API key is required for the local reference runtime.
+
+```powershell
+npm install
+npm test
+npm run seed
+npm run shard -- --query "What should the follow-up email remember?"
+npm run eval:memory -- --json
+```
+
+Then start the local cockpit:
+
+```powershell
+npm start
+```
+
+Open:
+
+```text
+http://127.0.0.1:8787/
+```
+
+## Where The Code Is
+
+| Path | What to inspect |
+| --- | --- |
+| `packages/memory-runtime/src/server.js` | Local HTTP runtime and API routes |
+| `packages/memory-runtime/src/cli.js` | Seed, list, and shard CLI |
+| `packages/memory-runtime/src/storage.js` | File-backed memory store |
+| `packages/shard-format/src/index.js` | Retrieval scoring and context-shard builder |
+| `packages/sdk-js/src/index.js` | JavaScript client |
+| `apps/text-cockpit/` | Installable browser/PWA interface |
+| `tests/runtime/` | Runtime, shard, PWA, and memory-lift tests |
+| `scripts/evaluate-memory-lift.mjs` | Small local reproduction harness |
+
+See [docs/reproduce.md](docs/reproduce.md) for the exact commands and what each one
+proves.
+
+## What This Is
+
+It gives developers a small local runtime, a public shard format, a JavaScript SDK, an
+installable text cockpit, and a repeatable evaluation harness. The goal is simple: store
+durable project facts, retrieve only what a task needs, and hand a compact context shard
+to a model or workflow.
 
 ## Why It Exists
 
@@ -133,13 +182,14 @@ We publish our full benchmark results — internal and external, wins and regres
 
 See [docs/benchmarks.md](docs/benchmarks.md).
 
-Our position on why the recall ceiling exists — retrieval delivers complete evidence for ~87% of questions while answers land at ~63%, so the shared bottleneck is the responder LLM, not the memory layer — is argued with its limits in [docs/thesis-llm-bottleneck.md](docs/thesis-llm-bottleneck.md).
+Our position on why the recall ceiling exists - retrieval delivers complete evidence for ~87% of questions while answers land at ~63%, so the shared bottleneck is the responder LLM, not the memory layer - is argued with its limits in [blog/thesis-llm-bottleneck.md](blog/thesis-llm-bottleneck.md).
 
-The product-level consequence — that "persistent AI" as sold is continuity-as-intelligence marketing on top of what is measurably an evidence supply chain, and that the real assets are ownership, token economics, and operational continuity — is argued in [docs/the-persistent-mirage.md](docs/the-persistent-mirage.md).
+The product-level consequence - that "persistent AI" as sold is continuity-as-intelligence marketing on top of what is measurably an evidence supply chain, and that the real assets are ownership, token economics, and operational continuity - is argued in [blog/the-persistent-mirage.md](blog/the-persistent-mirage.md).
 
 ## Blog
 
-Shorter, plainer writing — what we built, what we measured, what we got wrong, and what changed our minds. See [blog/](blog/).
+Thesis, interpretation, reflections, and public-facing writing live in [blog/](blog/).
+Technical reference lives in [docs/](docs/).
 
 ## Public Boundary
 

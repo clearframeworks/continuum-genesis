@@ -1,5 +1,7 @@
 node_modules/
 .continuum-genesis/
+.continuum-instances/
+.epai/
 coverage/
 dist/
 *.log

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Continuum Genesis social preview</title>
+  <desc id="desc">Continuum Genesis logo and wordmark for GitHub social preview cards.</desc>
+  <defs>
+    <radialGradient id="sky" cx="72%" cy="8%" r="92%">
+      <stop offset="0" stop-color="#163f45"/>
+      <stop offset="0.42" stop-color="#071b1b"/>
+      <stop offset="1" stop-color="#030708"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="214" y1="151" x2="478" y2="489" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#59e0d0"/>
+      <stop offset="0.56" stop-color="#2aa887"/>
+      <stop offset="1" stop-color="#0f5a45"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.18 0 0 0 0 0.83 0 0 0 0 0.67 0 0 0 0.58 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#sky)"/>
+  <path d="M0 496 C178 432 290 548 458 478 C636 404 763 490 944 386 C1080 308 1174 330 1280 254 L1280 640 L0 640 Z" fill="#2fd4c2" opacity="0.08"/>
+  <path d="M964 0 C1036 88 1135 152 1280 136" fill="none" stroke="#2fd4c2" stroke-width="98" stroke-linecap="round" opacity="0.12"/>
+
+  <g transform="translate(98 140)" filter="url(#glow)">
+    <rect x="0" y="0" width="360" height="360" rx="72" fill="#071416" stroke="rgba(140,220,214,0.28)" stroke-width="5"/>
+    <g fill="none" stroke-linecap="round">
+      <circle cx="180" cy="180" r="106" stroke="url(#accent)" stroke-width="25" stroke-dasharray="556 668" transform="rotate(-75 180 180)"/>
+      <circle cx="180" cy="180" r="61" stroke="#f4efe3" stroke-width="19" stroke-dasharray="319 383" transform="rotate(105 180 180)" opacity="0.94"/>
+      <circle cx="180" cy="180" r="20" fill="#2fd4c2" stroke="none"/>
+    </g>
+  </g>
+
+  <g transform="translate(512 214)">
+    <text x="0" y="70" fill="#f4efe3" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="66" font-weight="800">Continuum Genesis</text>
+    <text x="4" y="132" fill="#9fc4bd" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600">MIT reference runtime for task-scoped AI memory</text>
+    <g transform="translate(5 190)" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">
+      <rect x="0" y="0" width="154" height="52" rx="26" fill="rgba(47,212,194,0.14)" stroke="rgba(47,212,194,0.52)"/>
+      <text x="40" y="34" fill="#2fd4c2">Local</text>
+      <rect x="178" y="0" width="130" height="52" rx="26" fill="rgba(244,239,227,0.11)" stroke="rgba(244,239,227,0.38)"/>
+      <text x="213" y="34" fill="#f4efe3">MIT</text>
+      <rect x="332" y="0" width="180" height="52" rx="26" fill="rgba(87,217,154,0.13)" stroke="rgba(87,217,154,0.46)"/>
+      <text x="368" y="34" fill="#57d99a">Auditable</text>
+    </g>
+  </g>
+</svg>

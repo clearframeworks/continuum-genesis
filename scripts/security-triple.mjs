@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(fileURLToPath(new URL("../", import.meta.url)));
-const SKIP_DIRS = new Set([".git", "node_modules", ".continuum-genesis"]);
+const SKIP_DIRS = new Set([".git", "node_modules", ".continuum-genesis", ".continuum-instances", ".epai"]);
 const TEXT_EXTENSIONS = new Set([".js", ".json", ".md", ".html", ".css", ".yml", ".yaml", ".txt", ""]);
 const join = (...parts) => parts.join("");
 const npmCli = process.env.npm_execpath || path.join(path.dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js");

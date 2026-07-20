@@ -1,6 +1,12 @@
 # The Persistent Mirage
 
-*Position paper, 2026-07-20. Companion to [The Reader Is the Bottleneck](./thesis-llm-bottleneck.md), which establishes the component-level finding this paper interprets at the product level. All numbers referenced here are published with provenance labels in [docs/benchmarks.md](./benchmarks.md); this document adds no new measurements.*
+**Looking for source code, tests, or reproduction commands?** This is a position paper,
+not the implementation entry point. Start with the runnable repo surface:
+[README](../README.md), [reproduce locally](../docs/reproduce.md), source in
+`packages/`, tests in `tests/`, and the local harness in
+`scripts/evaluate-memory-lift.mjs`.
+
+*Position paper, 2026-07-20. Companion to [The Reader Is the Bottleneck](./thesis-llm-bottleneck.md), which establishes the component-level finding this paper interprets at the product level. All numbers referenced here are published with provenance labels in [docs/benchmarks.md](../docs/benchmarks.md); this document adds no new measurements.*
 
 **Claim: "persistent AI" — the promise that memory makes an AI smarter about you over time — is a mirage. What memory layers measurably deliver is not intelligence. It is logistics: evidence, delivered cheaper and faster, from a record you own. The mirage persists because the industry scores the reader and credits the memory.**
 
@@ -59,11 +65,11 @@ That is a smaller promise than "an AI that grows with you." It has the advantage
 
 ## Limits
 
-- Our numbers are officially scored with the benchmarks' own scripts, logs retained, but not yet independently reproduced; we label them accordingly and hold others to the same standard ([how to read the labels](./benchmarks.md)).
+- Our numbers are officially scored with the benchmarks' own scripts, logs retained, but not yet independently reproduced; we label them accordingly and hold others to the same standard ([how to read the labels](../docs/benchmarks.md)).
 - The evidence base is one benchmark family (LongMemEval-S, with corroborating pattern on LoCoMo) and one reader class; the thesis details the bounds.
 - Retrieval is commodity *at this scale*; harder corpora may reopen genuine retrieval differentiation *within* the band — a real contest, just not the one the marketing describes.
 - Section 5's continuity claim is labeled operational, not measured. We would rather flag an unbenchmarked claim than let it borrow credibility from the benchmarked ones.
 
 ## Provenance
 
-All figures and their labels: [docs/benchmarks.md](./benchmarks.md). Component-level argument and the reader-swap corroboration: [docs/thesis-llm-bottleneck.md](./thesis-llm-bottleneck.md). External figures cited remain **[vendor, self-reported]** per their sources.
+All figures and their labels: [docs/benchmarks.md](../docs/benchmarks.md). Component-level argument and the reader-swap corroboration: [The Reader Is the Bottleneck](./thesis-llm-bottleneck.md). External figures cited remain **[vendor, self-reported]** per their sources.

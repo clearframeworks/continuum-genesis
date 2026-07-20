@@ -1,6 +1,12 @@
 # Thesis: The Reader Is the Bottleneck
 
-*Position paper, 2026-07-19. All numbers interpreted here are published, with provenance labels, in [docs/benchmarks.md](./benchmarks.md). This document adds no new measurements — it argues what the existing ones mean.*
+**Looking for source code, tests, or reproduction commands?** This is a position paper,
+not the implementation entry point. Start with the runnable repo surface:
+[README](../README.md), [reproduce locally](../docs/reproduce.md), source in
+`packages/`, tests in `tests/`, and the local harness in
+`scripts/evaluate-memory-lift.mjs`.
+
+*Position paper, 2026-07-19. All numbers interpreted here are published, with provenance labels, in [docs/benchmarks.md](../docs/benchmarks.md). This document adds no new measurements — it argues what the existing ones mean.*
 
 **Claim: on standard long-memory benchmarks, the measured accuracy ceiling is primarily a limitation of the responder LLM — the "reader" that must answer from retrieved evidence — not of the memory or retrieval layer.**
 
@@ -35,7 +41,7 @@ Now bound the failure attribution. 37.0% of questions were answered wrong. At mo
 
 This arithmetic bound is the thesis's primary evidence. It is ours, it is officially scored, and it is the most direct form the evidence can take: it does not compare systems or infer from component swaps — it shows the reader failing with the complete evidence already in its hands.
 
-The per-category pattern in [benchmarks.md §3](./benchmarks.md#3-internal-numbers-the-bigger-picture) says the same thing from a different angle: the categories that fail hardest — temporal reasoning (54.1%), multi-session assembly (53.4%), preference inference (13.3%) — are precisely the ones that demand reasoning *over* retrieved evidence, not the ones that demand finding it.
+The per-category pattern in [benchmarks.md §3](../docs/benchmarks.md#3-internal-numbers-the-bigger-picture) says the same thing from a different angle: the categories that fail hardest — temporal reasoning (54.1%), multi-session assembly (53.4%), preference inference (13.3%) — are precisely the ones that demand reasoning *over* retrieved evidence, not the ones that demand finding it.
 
 ## Move 3: The convergence proof
 
@@ -84,7 +90,7 @@ Zep's own published results stage this contest directly, with the same reader on
 
 The memory layer earns its +8.4 points not by reasoning better — it does not reason at all — but by delivering *better-curated* evidence than a raw dump, at a fraction of the tokens. (The same measured gap appears with the stronger reader: 60.2% full-context vs 71.2% with Zep, from the same table — and those full-context rows reproduce Move 3's reader-swap effect on the baseline itself: 55.4% → 60.2% from changing nothing but the reader.)
 
-That is the real persistence contest, and it runs entirely on axes the memory actually controls: evidence quality, token cost, latency, ownership. It is the contest our token-first engine was built for — reaching its accuracy band at **~26× fewer prompt tokens per query** ([benchmarks.md §3](./benchmarks.md#3-internal-numbers-the-bigger-picture)).
+That is the real persistence contest, and it runs entirely on axes the memory actually controls: evidence quality, token cost, latency, ownership. It is the contest our token-first engine was built for — reaching its accuracy band at **~26× fewer prompt tokens per query** ([benchmarks.md §3](../docs/benchmarks.md#3-internal-numbers-the-bigger-picture)).
 
 The structural point follows. End-to-end QA accuracy is a real user outcome and worth reporting — we report ours. But it is reader-capped (Moves 1–3), so presenting it as a *memory* metric conflates the reader's reasoning with the memory's retrieval, and optimizing a memory design against a reader-bound number chases a signal the memory cannot move. That conflation is precisely why honest scores cluster in a narrow band regardless of architecture. A memory-honest scorecard keeps the two ledgers separate: **what the memory owns** — evidence quality, tokens, latency, ownership, auditability — and **what the reader owns** — the artifact.
 
@@ -96,7 +102,7 @@ The structural point follows. End-to-end QA accuracy is a real user outcome and 
 
 2. **The accuracy ceiling rises when the reader improves, not when the memory gets more sophisticated.** Our arithmetic bound is the most direct demonstration — the reader failing with complete evidence in hand — and Zep's +7.4-point reader swap corroborates it from outside our lab. As frontier readers improve, every honest memory system's benchmark score should rise together — and the ranking between them should barely change.
 
-3. **The real differentiation on the memory layer is therefore not recall score.** It is retrieval quality per token, cost, data ownership, and auditability — the axes where designs genuinely separate. Our token-first engine reaches its score at ~26× fewer prompt tokens per query than the baseline ([benchmarks.md §3](./benchmarks.md#3-internal-numbers-the-bigger-picture)). Accuracy plateaus; token spend does not.
+3. **The real differentiation on the memory layer is therefore not recall score.** It is retrieval quality per token, cost, data ownership, and auditability — the axes where designs genuinely separate. Our token-first engine reaches its score at ~26× fewer prompt tokens per query than the baseline ([benchmarks.md §3](../docs/benchmarks.md#3-internal-numbers-the-bigger-picture)). Accuracy plateaus; token spend does not.
 
 ## The limits of this claim
 
@@ -106,7 +112,7 @@ We publish this as a thesis, not a theorem, and the boundaries matter:
 - **Memory design still matters within the band.** Our own two builds differ by 7.4 points (63.0% vs 55.6%). Our distillation engine lost real information at write time — a genuine memory failure mode we have documented rather than hidden. Design choices move you *within* the band; they have not been shown to move anyone *out* of it.
 - **The reader-share estimate is a lower bound in one direction only.** We attribute failures conservatively toward retrieval; the reader's true share of errors is likely higher than two-thirds, but we only claim the bound the arithmetic supports.
 - **Scope is this benchmark family and this reader class.** The evidence is LongMemEval-S (with corroborating pattern on LoCoMo) using gpt-4o-mini. A materially stronger reader raises the ceiling — that is the thesis's own prediction — and could also change the error composition.
-- **Our numbers are officially scored but self-reported.** We ran the benchmarks' own official scorers and retain the logs, but no third party has independently reproduced our runs yet. We hold our numbers to the same standard we hold everyone else's ([benchmarks.md](./benchmarks.md#how-to-read-the-labels)).
+- **Our numbers are officially scored but self-reported.** We ran the benchmarks' own official scorers and retain the logs, but no third party has independently reproduced our runs yet. We hold our numbers to the same standard we hold everyone else's ([benchmarks.md](../docs/benchmarks.md#how-to-read-the-labels)).
 - **The memory-vs-full-context comparison is one measured result, not a law.** The 55.4%/63.8% contest comes from Zep's own paper, and its full-context baseline is likewise vendor self-reported. The +8.4-point gap is what was measured on this benchmark with this reader — we do not claim a memory layer always beats full context, and a raw dump is not the only native-memory strategy a reader can be given (summarization and sliding windows exist, with their own trade-offs).
 
 ## Conclusion
@@ -120,6 +126,6 @@ That is why we stopped chasing the recall number, and why every claim we publish
 ## Provenance
 
 - Retrieval diagnostic: session-level `recall_all@10 = 0.8745` (also `recall_all@5 = 0.7702`), official LongMemEval `print_retrieval_metrics.py`, keyword-baseline selector, session ranking, run of 2026-07-18 — the same run chain that produced the 63.0% QA score. Turn-level ranking scores lower (`recall_all@10 = 0.7043`); we cite the session-level figure because the QA run retrieves at session granularity.
-- QA scores, per-category tables, token counts, and all external figures with their labels: [docs/benchmarks.md](./benchmarks.md).
+- QA scores, per-category tables, token counts, and all external figures with their labels: [docs/benchmarks.md](../docs/benchmarks.md).
 - Zep reader-swap figures (63.8% gpt-4o-mini / 71.2% gpt-4o, same memory system) and full-context baseline figures (55.4% gpt-4o-mini / 60.2% gpt-4o) from Table 2 of [their paper](https://arxiv.org/abs/2501.13956) **[vendor, self-reported]** — verified against the published table before citing.
-- Scorer output logs retained internally; reproducible fixtures are on the [roadmap](./roadmap.md).
+- Scorer output logs retained internally; reproducible fixtures are on the [roadmap](../docs/roadmap.md).
