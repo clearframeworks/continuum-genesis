@@ -22,12 +22,14 @@ It is an appealing equation. Our numbers say it is false.
 
 Four results, argued in full in the [thesis](./reader-is-the-bottleneck.md):
 
-1. **Retrieval is a solved commodity at this scale.** Our deliberately simple keyword selector delivered the *complete* evidence for **87.45%** of LongMemEval-S questions. **[ours, officially scored]**
+1. **Retrieval was not the binding constraint in our runs.** Our deliberately simple keyword selector delivered the *complete* evidence for **87.45%** of LongMemEval-S questions. **[ours, officially scored]**
 2. **Answers are capped by the reader, not the memory.** The same run answered **63.0%** correctly — at minimum **two-thirds of all wrong answers occurred with the complete evidence already in the prompt.** **[ours, officially scored]**
-3. **Architecture doesn't move the number.** Radically different memory designs converge in a 49–64% band with the same reader; our own more sophisticated engine scored *lower* (55.6%) than our simple baseline. Swapping entire memory architectures moves scores ~1 point. Swapping the reader moves them ~7 (Zep, 63.8% → 71.2%, gpt-4o-mini → gpt-4o). **[ours, officially scored / vendor, self-reported]**
-4. **What memory does measurably buy:** the same accuracy band at **~26× fewer prompt tokens per query** than re-reading raw history, from a record that lives in your files rather than a provider's account. **[ours, officially scored]**
+3. **Architecture doesn't move the number — proven on tests we took.** We ran seven memory-side variants (keyword, hybrid keyword+preference, global-context, chain-of-thought, distillation) through the official scorer at a fixed gpt-4o-mini reader; the best *tied* the simple baseline (63.2% vs 63.0%) and none beat it. **[ours, officially scored]** Reader swaps, by contrast, move scores several points — a published example moved 63.8% → 71.2% by changing only gpt-4o-mini → gpt-4o. **[vendor, self-reported]**
+4. **What memory does measurably buy:** the same accuracy band at **~26× fewer prompt tokens per query** than re-reading raw history, from a record that lives in your files rather than a provider's account. **[ours, self-measured]**
 
-If memory made AI smarter, sophistication would raise scores and architectures would separate. Neither happens. The memory never produces the answer; the reader does, every time, in every system.
+If memory made AI smarter, sophistication would raise scores and architectures would separate. Neither happened across seven of our own builds. The memory never produces the answer; the reader does, every time, in every system.
+
+**A note on what counts.** This paper, like the thesis, weighs only official, reproducible benchmark scores and discounts self-reported numbers on private harnesses — a bar it holds our own claims to as well (our token-efficiency figure is labeled *self-measured*, not standardized). The field posts many high scores on custom pipelines; when the standardized benchmark costs a few dollars, the choice to report a private number *instead of* the cheap public one is itself part of the story a mirage tells. Full statement of the rule: the thesis's [evidentiary standard](./reader-is-the-bottleneck.md#what-counts-as-evidence-here).
 
 ## 3. Naming the mirage
 
